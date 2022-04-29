@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1651230219",
+        "python_version": "3.8.0 (v3.8.0:fa919fdf25, Oct 14 2019, 10:23:27) \n[Clang 6.0 (clang-600.0.57)]",
+        "command_line_arguments": "/Library/Frameworks/Python.framework/Versions/3.8/bin/mlagents-learn config/ppo/SkyMLTest.yml --run-id=SkyMLTest --force",
+        "mlagents_version": "0.27.0",
+        "mlagents_envs_version": "0.27.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.8.1",
+        "numpy_version": "1.22.3",
+        "end_time_seconds": "1651230279"
+    },
+    "total": 60.633143334,
+    "count": 1,
+    "self": 0.02241137500000434,
+    "children": {
+        "run_training.setup": {
+            "total": 0.042640917000000056,
+            "count": 1,
+            "self": 0.042640917000000056
+        },
+        "TrainerController.start_learning": {
+            "total": 60.568091042,
+            "count": 1,
+            "self": 0.0008261250000032305,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 60.5666745,
+                    "count": 1,
+                    "self": 60.5666745
+                },
+                "TrainerController._save_models": {
+                    "total": 0.0005904169999979558,
+                    "count": 1,
+                    "self": 0.0005904169999979558
+                }
+            }
+        }
+    }
+}
