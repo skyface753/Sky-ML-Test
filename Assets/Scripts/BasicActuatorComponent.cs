@@ -10,7 +10,7 @@ namespace Unity.MLAgentsExamples
     /// </summary>
     public class BasicActuatorComponent : ActuatorComponent
     {
-        public PlayerController playerController;
+        public BasicController basicController;
         ActionSpec m_ActionSpec = ActionSpec.MakeDiscrete(3);
 
         /// <summary>
@@ -19,7 +19,7 @@ namespace Unity.MLAgentsExamples
         /// <returns></returns>
         public override IActuator[] CreateActuators()
         {
-            return new IActuator[] { new BasicActuator(playerController) };
+            return new IActuator[] { new BasicActuator(basicController) };
         }
 
         public override ActionSpec ActionSpec
@@ -33,12 +33,12 @@ namespace Unity.MLAgentsExamples
     /// </summary>
     public class BasicActuator : IActuator
     {
-        public PlayerController playerController;
+        public BasicController basicController;
         ActionSpec m_ActionSpec;
 
-        public BasicActuator(PlayerController controller)
+        public BasicActuator(BasicController controller)
         {
-            playerController = controller;
+            basicController = controller;
             m_ActionSpec = ActionSpec.MakeDiscrete(3);
         }
 
@@ -60,21 +60,28 @@ namespace Unity.MLAgentsExamples
 
         public void OnActionReceived(ActionBuffers actionBuffers)
         {
-            var movement = actionBuffers.DiscreteActions[0];
+            var continuousActions = actionBuffers.DiscreteActions;
 
-            var direction = 0;
+            var directionX = 0;
+            var directionZ = 0;
 
-            switch (movement)
+            switch (continuousActions[0])
             {
+                case 0:
+                    directionX = -1;
+                    break;
                 case 1:
-                    direction = -1;
+                    directionZ = 1;
                     break;
                 case 2:
-                    direction = 1;
+                    directionX = 1;
+                    break;
+                case 3:
+                    directionZ = -1;
                     break;
             }
-
-            playerController.MoveDirection(direction,0);
+            basicController.MoveDirection(directionX, directionZ);
+            
         }
 
         public void Heuristic(in ActionBuffers actionBuffersOut)

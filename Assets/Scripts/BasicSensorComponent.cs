@@ -9,7 +9,7 @@ namespace Unity.MLAgentsExamples
     /// </summary>
     public class BasicSensorComponent : SensorComponent
     {
-        public PlayerController playerController;
+        public BasicController basicController;
 
         /// <summary>
         /// Creates a BasicSensor.
@@ -17,7 +17,7 @@ namespace Unity.MLAgentsExamples
         /// <returns></returns>
         public override ISensor[] CreateSensors()
         {
-            return new ISensor[] { new BasicSensor(playerController) };
+            return new ISensor[] { new BasicSensor(basicController) };
         }
     }
 
@@ -27,11 +27,11 @@ namespace Unity.MLAgentsExamples
     /// </summary>
     public class BasicSensor : SensorBase
     {
-        public PlayerController playerController;
+        public BasicController basicController;
 
-        public BasicSensor(PlayerController controller)
+        public BasicSensor(BasicController controller)
         {
-            playerController = controller;
+            basicController = controller;
         }
 
         /// <summary>
@@ -43,13 +43,13 @@ namespace Unity.MLAgentsExamples
         {
             // One-hot encoding of the position
             Array.Clear(output, 0, output.Length);
-            output[playerController.positionX] = 1;
+            output[basicController.position] = 1;
         }
 
         /// <inheritdoc/>
         public override ObservationSpec GetObservationSpec()
         {
-            return ObservationSpec.Vector(PlayerController.k_Extents);
+            return ObservationSpec.Vector(BasicController.k_Extents);
         }
 
         /// <inheritdoc/>
